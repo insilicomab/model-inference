@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "model-inference"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = {version = "2.1.0", source = "torch_cu121"}
+torchvision = {version = "0.16.0", source = "torch_cu121"}
+pandas = "^2.2.1"
+omegaconf = "^2.3.0"
+timm = "^0.9.16"
+wandb = "^0.16.4"
+
+
+[[tool.poetry.source]]
+name = "torch_cu121"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
