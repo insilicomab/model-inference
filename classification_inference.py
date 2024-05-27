@@ -59,7 +59,9 @@ def main(args):
         print("Test Time Augmentation is Running")
         # Test Time Augmentation
         tta = TestTimeAugmentationInference()
-        tta_transforms = tta.setup_tta_transforms(image_size=config.image_size)
+        tta_transforms = tta.setup_tta_transforms(
+            image_size=config.image_size, in_chas=config.input_channels
+        )
 
         prediction_df = tta.inference_tta(
             root=args.image_root,

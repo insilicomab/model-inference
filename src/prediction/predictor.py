@@ -62,13 +62,19 @@ class TestTimeAugmentationInference:
     def __init__(self) -> None:
         pass
 
-    def setup_tta_transforms(self, image_size: int) -> list[Compose]:
+    def setup_tta_transforms(self, image_size: int, in_chas: int) -> list[Compose]:
+        if in_chas == 1:
+            normalization = transforms.Normalize([0.5], [0.5])
+        elif in_chas == 3:
+            normalization = transforms.Normalize(
+                [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
+            )
         tta_transforms = [
             transforms.Compose(
                 [
                     transforms.CenterCrop((image_size, image_size)),
                     transforms.ToTensor(),
-                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+                    normalization,
                 ]
             ),
             transforms.Compose(
@@ -76,7 +82,7 @@ class TestTimeAugmentationInference:
                     transforms.CenterCrop((image_size, image_size)),
                     transforms.functional.hflip,
                     transforms.ToTensor(),
-                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+                    normalization,
                 ]
             ),
             transforms.Compose(
@@ -84,7 +90,7 @@ class TestTimeAugmentationInference:
                     transforms.CenterCrop((image_size, image_size)),
                     transforms.functional.vflip,
                     transforms.ToTensor(),
-                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+                    normalization,
                 ]
             ),
         ]
