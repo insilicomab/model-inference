@@ -8,10 +8,12 @@ class TimmNet(nn.Module):
         super(TimmNet, self).__init__()
         self.config = config
         self.model_name = config.net.model_name
+        self.in_chans = config.input_channels
         self.num_classes = config.num_classes
         self.pretrained = config.net.pretrained
         self.net = timm.create_model(
             self.model_name,
+            in_chans=self.in_chans,
             num_classes=self.num_classes,
             pretrained=self.pretrained,
         )

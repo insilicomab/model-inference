@@ -76,6 +76,7 @@ def main(args):
             root=args.image_root,
             image_path_list=image_path_list,
             image_size=config.image_size,
+            in_chas=config.input_channels,
         )
 
         # inference

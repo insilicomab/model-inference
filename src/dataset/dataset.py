@@ -32,14 +32,17 @@ class InferenceImageDataset(Dataset):
 
 
 def get_inference_dataloader(
-    root: str, image_path_list: list, image_size: int
+    root: str,
+    image_path_list: list,
+    image_size: int,
+    in_chas: int,
 ) -> DataLoader:
 
     # test dataset
     test_dataset = InferenceImageDataset(
         root=root,
         image_path_list=image_path_list,
-        transform=TestTransforms(image_size=image_size),
+        transform=TestTransforms(image_size=image_size, in_chas=in_chas),
     )
 
     # dataloader
